@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeostasisHUB | Validação e Aprovação de Tecnologias para Saúde</title>
+    <style>
+        /* CONFIGURAÇÕES GERAIS / PALETA DE CORES */
+        :root {
+            --bg-dark: #121416;
+            --bg-card: #1a1d20;
+            --primary: #10b981; /* Verde Esmeralda Cyber */
+            --primary-hover: #059669;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* HEADER */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 80px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .tagline {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            max-width: 800px;
+            margin-bottom: 24px;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin-bottom: 40px;
+        }
+
+        /* CARD DE CAPTURA (FORMULÁRIO DE ALTA CONVERSÃO) */
+        .cta-box {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: left;
+        }
+
+        .cta-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .cta-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: var(--bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 24px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* PILARES OPERACIONAIS (BENEFÍCIOS) */
+        .features {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-card);
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .feature-card .icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            font-weight: bold;
+        }
+
+        .feature-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.25rem; }
+            .hero { padding: 40px 0; }
+            .cta-box { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABEÇALHO -->
+    <header>
+        <div class="container">
+            <div class="logo">Homeostasis<span>HUB</span></div>
+        </div>
+    </header>
+
+    <!-- MAIN HERO SECTION -->
+    <section class="container hero">
+        <div class="tagline">Ecossistema de Homologação Deep Tech</div>
+        <h1>Testamos, Validamos e Aprovamos <span>Tecnologias para a Saúde</span></h1>
+        <p class="subtitle">Apoiamos a liderança da gestão pública e privada na implementação de infraestruturas de dados e softwares proprietários robustos.</p>
+
+        <!-- FORMULÁRIO CAPTURA CONVERSÃO -->
+        <div class="cta-box">
+            <h3>Solicite uma Validação Técnica</h3>
+            <p>Conecte sua tecnologia ou infraestrutura hospitalar ao nosso processo rigoroso de auditoria.</p>
+            
+           <form id="whatsappForm" onsubmit="enviarParaWhatsApp(event)">
+    <div class="form-group">
+        <label for="name">Nome Completo</label>
+        <input type="text" id="name" name="name" required placeholder="Ex: Dr. Roberto Silva">
+    </div>
+    <div class="form-group">
+        <label for="email">E-mail Corporativo</label>
+        <input type="email" id="email" name="email" required placeholder="Ex: nome@empresa.com.br">
+    </div>
+    <div class="form-group">
+        <label for="segment">Segmento de Atuação</label>
+        <select id="segment" name="segment" required>
+            <option value="" disabled selected>Selecione seu perfil</option>
+            <option value="Gestão Hospitalar / Pública">Gestão Hospitalar / Pública</option>
+            <option value="Desenvolvedor de Softwares Médicos">Desenvolvedor de Softwares Médicos</option>
+            <option value="Fabricante de Equipamentos">Fabricante de Equipamentos</option>
+            <option value="Investidor / Inovação">Investidor / Inovação</option>
+        </select>
+    </div>
+    <button type="submit" class="btn-submit">Iniciar Alinhamento Estratégico</button>
+</form>
+        </div>
+    </section>
+
+    <!-- PILARES DE ATUAÇÃO -->
+    <section class="features">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2rem; font-weight: 700;">Nossa Metodologia Operacional</h2>
+            <div class="features-grid">
+                
+                <div class="feature-card">
+                    <div class="icon">// 01</div>
+                    <h4>Auditoria Avançada</h4>
+                    <p>Análise minuciosa de arquitetura de softwares, segurança jurídica e conformidade regulatória para sistemas complexos.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">// 02</div>
+                    <h4>Estabilização de Fluxos</h4>
+                    <p>Processamento massivo de dados voltado para eliminar gargalos e garantir a soberania das informações de saúde.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">// 03</div>
+                    <h4>Homologação Real</h4>
+                    <p>Testes práticos e contínuos que convertem inovações conceituais em soluções prontas para a linha de frente.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 HomeostasisHUB. Consolidação de Inovação Real. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+<script>
+function enviarParaWhatsApp(event) {
+  event.preventDefault();
+
+  const nome = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const segmento = document.getElementById("segment").value;
+
+  const telefone = "559881972712";
+
+  const mensagem =
+`🏥 *Novo Contato HomeostasisHUB*
+
+👤 *Nome:* ${nome}
+📧 *E-mail:* ${email}
+🧩 *Segmento:* ${segmento}
+
+🚀 Gostaria de iniciar um alinhamento estratégico.`;
+
+  const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+
+  window.open(url, "_blank");
+}
+</script>
+</body>
+</html>
