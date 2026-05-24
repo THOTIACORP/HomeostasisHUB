@@ -1,400 +1,1010 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HomeostasisHUB | Validação e Aprovação de Tecnologias para Saúde</title>
-    <style>
-        /* CONFIGURAÇÕES GERAIS / PALETA DE CORES */
-        :root {
-            --bg-dark: #121416;
-            --bg-card: #1a1d20;
-            --primary: #10b981; /* Verde Esmeralda Cyber */
-            --primary-hover: #059669;
-            --text-main: #ffffff;
-            --text-muted: #9ca3af;
-            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HomeostasisHUB | Hub de Homologação Deep Tech para Saúde</title>
+  <meta name="description" content="Testamos, validamos e homologamos equipamentos, softwares médicos e infraestruturas hospitalares com rigor técnico, regulatório e operacional para destravar contratos, compras públicas e escala comercial." />
+  <meta name="theme-color" content="#090d0f" />
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <style>
+    :root {
+      --bg: #070b0d;
+      --bg-2: #0b1114;
+      --card: rgba(255, 255, 255, 0.065);
+      --card-strong: rgba(255, 255, 255, 0.095);
+      --border: rgba(255, 255, 255, 0.11);
+      --border-strong: rgba(52, 211, 153, 0.32);
+      --primary: #10b981;
+      --primary-2: #34d399;
+      --primary-3: #6ee7b7;
+      --warning: #fbbf24;
+      --text: #ffffff;
+      --muted: #a7b0b8;
+      --muted-2: #d2d8de;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.48);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
 
-        body {
-            font-family: var(--font-family);
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* HEADER */
-        header {
-            padding: 24px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.05em;
-        }
-
-        .logo span {
-            color: var(--primary);
-        }
-
-        /* HERO SECTION */
-        .hero {
-            padding: 80px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .tagline {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--primary);
-            padding: 6px 16px;
-            border-radius: 100px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.03em;
-            max-width: 800px;
-            margin-bottom: 24px;
-        }
-
-        h1 span {
-            color: var(--primary);
-        }
-
-        .subtitle {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            max-width: 650px;
-            margin-bottom: 40px;
-        }
-
-        /* CARD DE CAPTURA (FORMULÁRIO DE ALTA CONVERSÃO) */
-        .cta-box {
-            background-color: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 40px;
-            width: 100%;
-            max-width: 550px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            text-align: left;
-        }
-
-        .cta-box h3 {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .cta-box p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 6px;
-            color: var(--text-muted);
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px 16px;
-            background-color: var(--bg-dark);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--text-main);
-            font-size: 1rem;
-            transition: border-color 0.2s;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .btn-submit {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            background-color: var(--primary);
-            color: var(--bg-dark);
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            margin-top: 24px;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--primary-hover);
-        }
-
-        /* PILARES OPERACIONAIS (BENEFÍCIOS) */
-        .features {
-            padding: 80px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 32px;
-            margin-top: 40px;
-        }
-
-        .feature-card {
-            background-color: var(--bg-card);
-            padding: 32px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .feature-card .icon {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-            font-weight: bold;
-        }
-
-        .feature-card h4 {
-            font-size: 1.25rem;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* FOOTER */
-        footer {
-            padding: 40px 0;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-     /* MOBILE REFINADO */
-@media (max-width: 768px) {
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
 
     body {
-        overflow-x: hidden;
+      font-family: var(--font);
+      color: var(--text);
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at 14% 4%, rgba(16, 185, 129, 0.26), transparent 31%),
+        radial-gradient(circle at 84% 6%, rgba(52, 211, 153, 0.14), transparent 28%),
+        linear-gradient(180deg, #080c0f 0%, #090d0f 42%, #070b0d 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.75), transparent 72%);
+      opacity: 0.5;
+    }
+
+    a {
+      color: inherit;
     }
 
     .container {
-        padding-left: 18px;
-        padding-right: 18px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
     }
 
     header {
-        padding-top: 20px;
-        padding-bottom: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(7, 11, 13, 0.76);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.38rem;
+      font-weight: 950;
+      letter-spacing: -0.065em;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--primary-2);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-2);
+    }
+
+    .nav-cta {
+      padding: 10px 16px;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      color: #04110c;
+      background: linear-gradient(135deg, var(--primary-3), var(--primary));
+      font-size: 0.84rem;
+      font-weight: 950;
+      text-decoration: none;
+      box-shadow: 0 16px 34px rgba(16, 185, 129, 0.22);
     }
 
     .hero {
-        padding-top: 52px;
-        padding-bottom: 56px;
+      padding: 88px 0 50px;
     }
 
-    .tagline {
-        margin-bottom: 28px;
-        padding: 8px 18px;
-        font-size: 0.72rem;
-        line-height: 1.4;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.06fr) minmax(360px, 0.94fr);
+      gap: 56px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 24px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      border: 1px solid rgba(52, 211, 153, 0.26);
+      background: rgba(16, 185, 129, 0.105);
+      color: var(--primary-2);
+      font-size: 0.77rem;
+      font-weight: 950;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary-2);
+      box-shadow: 0 0 0 8px rgba(52, 211, 153, 0.11);
     }
 
     h1 {
-        font-size: 2rem;
-        line-height: 1.12;
-        margin-bottom: 24px;
-        letter-spacing: -0.04em;
+      max-width: 820px;
+      margin-bottom: 26px;
+      font-size: clamp(2.62rem, 5.6vw, 5.25rem);
+      line-height: 0.95;
+      letter-spacing: -0.082em;
+    }
+
+    h1 span {
+      background: linear-gradient(90deg, var(--primary-3), var(--primary), #d1fae5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .subtitle {
-        font-size: 0.98rem;
-        line-height: 1.8;
-        margin-bottom: 36px;
-        padding: 0 4px;
-        text-align: justify;
+      max-width: 700px;
+      margin-bottom: 32px;
+      color: var(--muted-2);
+      font-size: 1.13rem;
+      line-height: 1.78;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 15px;
+      font-weight: 950;
+      text-decoration: none;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      color: #04110c;
+      background: linear-gradient(135deg, var(--primary-3), var(--primary));
+      box-shadow: 0 18px 44px rgba(16, 185, 129, 0.26);
+    }
+
+    .btn-primary:hover,
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 58px rgba(16, 185, 129, 0.36);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-strong);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .trust-copy {
+      margin-bottom: 34px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .hero-proof {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 660px;
+    }
+
+    .metric-card {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.048);
+    }
+
+    .metric-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--primary-2);
+      font-size: 1.45rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .metric-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.35;
     }
 
     .cta-box {
-        padding: 22px;
-        border-radius: 18px;
-        margin-top: 8px;
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(52, 211, 153, 0.22), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,0.105), rgba(255,255,255,0.045));
+      box-shadow: var(--shadow);
     }
 
-    .cta-box h3 {
-        line-height: 1.3;
-        margin-bottom: 12px;
+    .cta-box::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,.14), transparent 22%, transparent 78%, rgba(52,211,153,.12));
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .mini-label {
+      margin-bottom: 12px;
+      color: var(--primary-2);
+      font-size: 0.75rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .cta-box h2 {
+      margin-bottom: 12px;
+      font-size: 1.72rem;
+      line-height: 1.12;
+      letter-spacing: -0.045em;
+    }
+
+    .form-benefits {
+      display: grid;
+      gap: 8px;
+      margin: 0 0 22px;
+      color: var(--muted-2);
+      font-size: 0.92rem;
+      list-style: none;
+    }
+
+    .form-benefits li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .form-benefits b {
+      color: var(--primary-2);
     }
 
     .form-group {
-        margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
-    .form-group input,
-    .form-group select {
-        padding: 14px 16px;
-        border-radius: 10px;
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: #d7dee4;
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 50px;
+      padding: 0 15px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 14px;
+      outline: none;
+      background: rgba(0, 0, 0, 0.31);
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    input::placeholder {
+      color: rgba(215, 222, 228, 0.45);
+    }
+
+    input:focus, select:focus {
+      border-color: var(--primary-2);
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12);
     }
 
     .btn-submit {
-        margin-top: 28px;
-        padding: 16px;
-        border-radius: 12px;
+      width: 100%;
+      min-height: 54px;
+      margin-top: 8px;
+      border: none;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary-3), var(--primary));
+      color: #03110b;
+      font-size: 1rem;
+      font-weight: 950;
+      cursor: pointer;
+      transition: 0.25s ease;
     }
 
-    .features {
-        padding-top: 60px;
-        padding-bottom: 60px;
+    .security-note {
+      margin-top: 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.79rem;
+      line-height: 1.45;
     }
 
-    .feature-card {
-        padding: 26px;
+    .logo-strip {
+      padding: 30px 0 74px;
     }
-}
-    </style>
+
+    .logo-card {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .logo-card p {
+      margin-bottom: 18px;
+      color: var(--muted-2);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .logos {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .logo-item {
+      min-height: 62px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.085);
+      border-radius: 18px;
+      color: rgba(255, 255, 255, 0.72);
+      background: rgba(255, 255, 255, 0.035);
+      font-weight: 950;
+      letter-spacing: -0.03em;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .section {
+      padding: 86px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-title {
+      max-width: 800px;
+      margin: 0 auto 46px;
+      text-align: center;
+    }
+
+    .section-title h2 {
+      margin-bottom: 14px;
+      font-size: clamp(2rem, 4vw, 3.45rem);
+      line-height: 1.02;
+      letter-spacing: -0.067em;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .pain-grid,
+    .method-grid,
+    .results-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .pain-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .pain-card,
+    .method-card,
+    .result-card,
+    .testimonial {
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      transition: 0.25s ease;
+    }
+
+    .pain-card {
+      min-height: 214px;
+      padding: 24px;
+    }
+
+    .pain-card:hover,
+    .method-card:hover,
+    .result-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-strong);
+      background: rgba(16, 185, 129, 0.075);
+    }
+
+    .pain-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 15px;
+      background: rgba(251, 191, 36, 0.12);
+      color: var(--warning);
+      font-weight: 950;
+    }
+
+    .pain-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+    }
+
+    .pain-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .method-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .method-card {
+      min-height: 345px;
+      padding: 28px;
+    }
+
+    .step {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      border-radius: 16px;
+      background: rgba(16, 185, 129, 0.14);
+      color: var(--primary-2);
+      font-weight: 950;
+    }
+
+    .method-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.24rem;
+      line-height: 1.25;
+      letter-spacing: -0.035em;
+    }
+
+    .gain {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--primary-3);
+      font-size: 0.9rem;
+      font-weight: 950;
+    }
+
+    .method-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .results-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-bottom: 22px;
+    }
+
+    .result-card {
+      padding: 28px;
+      text-align: center;
+    }
+
+    .result-card strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--primary-2);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .result-card span {
+      color: var(--muted-2);
+      font-weight: 750;
+    }
+
+    .testimonial {
+      max-width: 820px;
+      margin: 30px auto 0;
+      padding: 30px;
+      text-align: center;
+      background:
+        radial-gradient(circle at top, rgba(16, 185, 129, 0.13), transparent 44%),
+        rgba(255, 255, 255, 0.055);
+    }
+
+    .testimonial blockquote {
+      margin-bottom: 14px;
+      font-size: 1.25rem;
+      line-height: 1.55;
+      letter-spacing: -0.025em;
+    }
+
+    .testimonial cite {
+      color: var(--muted);
+      font-style: normal;
+      font-weight: 750;
+    }
+
+    .final-cta {
+      padding: 76px 28px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(52, 211, 153, 0.26), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.045));
+      box-shadow: var(--shadow);
+    }
+
+    .final-cta h2 {
+      max-width: 860px;
+      margin: 0 auto 16px;
+      font-size: clamp(2.05rem, 4.5vw, 3.7rem);
+      line-height: 1.02;
+      letter-spacing: -0.07em;
+    }
+
+    .final-cta p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: var(--muted-2);
+      font-size: 1.08rem;
+    }
+
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 980px) {
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 42px;
+      }
+
+      .hero-proof,
+      .logos,
+      .method-grid,
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pain-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hero {
+        padding: 54px 0 34px;
+      }
+
+      .eyebrow {
+        margin-bottom: 22px;
+        padding: 8px 12px;
+        font-size: 0.64rem;
+        line-height: 1.35;
+      }
+
+      h1 {
+        font-size: clamp(2.42rem, 12vw, 3.25rem);
+        line-height: 0.98;
+        letter-spacing: -0.072em;
+      }
+
+      .subtitle {
+        font-size: 0.98rem;
+        line-height: 1.75;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+
+      .trust-copy {
+        font-size: 0.8rem;
+        line-height: 1.55;
+      }
+
+      .cta-box {
+        padding: 22px;
+        border-radius: 25px;
+      }
+
+      .cta-box h2 {
+        font-size: 1.42rem;
+      }
+
+      .logo-strip {
+        padding: 24px 0 54px;
+      }
+
+      .logo-card {
+        padding: 20px;
+      }
+
+      .section {
+        padding: 58px 0;
+      }
+
+      .pain-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pain-card,
+      .method-card {
+        min-height: auto;
+        padding: 24px;
+      }
+
+      .testimonial {
+        padding: 24px;
+      }
+
+      .testimonial blockquote {
+        font-size: 1.06rem;
+      }
+
+      .final-cta {
+        padding: 48px 20px;
+        border-radius: 26px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-
-    <!-- CABEÇALHO -->
-    <header>
-        <div class="container">
-            <div class="logo">Homeostasis<span>HUB</span></div>
-        </div>
-    </header>
-
-    <!-- MAIN HERO SECTION -->
-    <section class="container hero">
-        <div class="tagline">Ecossistema de Homologação Deep Tech</div>
-        <h1>Testamos, Validamos, Aprovamos e Vendemos <span>Tecnologias para a Saúde</span></h1>
-        <p class="subtitle">Apoiamos a liderança da gestão pública e privada na implementação de infraestruturas de equipamentos de dados e softwares proprietários robustos</p>
-
-        <!-- FORMULÁRIO CAPTURA CONVERSÃO -->
-        <div class="cta-box">
-            <h3>Solicite uma Validação Técnica</h3>
-            <p>Conecte sua tecnologia ou infraestrutura hospitalar ao nosso processo rigoroso de auditoria.</p>
-            
-           <form id="whatsappForm" onsubmit="enviarParaWhatsApp(event)">
-    <div class="form-group">
-        <label for="name">Nome Completo</label>
-        <input type="text" id="name" name="name" required placeholder="Ex: Dr. Roberto Silva">
+  <header>
+    <div class="container nav">
+      <div class="logo">Homeostasis<span>HUB</span></div>
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#para-quem">Para quem é</a>
+        <a href="#metodologia">Metodologia</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#formulario" class="nav-cta">Avaliação gratuita</a>
+      </nav>
     </div>
-    <div class="form-group">
-        <label for="email">E-mail Corporativo</label>
-        <input type="email" id="email" name="email" required placeholder="Ex: nome@empresa.com.br">
-    </div>
-    <div class="form-group">
-        <label for="segment">Segmento de Atuação</label>
-        <select id="segment" name="segment" required>
-            <option value="" disabled selected>Selecione seu perfil</option>
-            <option value="Gestão Hospitalar / Pública">Gestão Hospitalar / Pública</option>
-            <option value="Desenvolvedor de Softwares Médicos">Desenvolvedor de Softwares Médicos</option>
-            <option value="Fabricante de Equipamentos">Fabricante de Equipamentos</option>
-            <option value="Investidor / Inovação">Investidor / Inovação</option>
-        </select>
-    </div>
-    <button type="submit" class="btn-submit">Iniciar Alinhamento Estratégico</button>
-</form>
-        </div>
-    </section>
+  </header>
 
-    <!-- PILARES DE ATUAÇÃO -->
-    <section class="features">
-        <div class="container">
-            <h2 style="text-align: center; font-size: 2rem; font-weight: 700;">Nossa Metodologia Operacional</h2>
-            <div class="features-grid">
-                
-                <div class="feature-card">
-                    <div class="icon">// 01</div>
-                    <h4>Auditoria Avançada</h4>
-                    <p>Análise minuciosa de equipamentos, arquitetura de softwares, segurança jurídica e conformidade regulatória para sistemas complexos</p>
-                </div>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="pulse-dot"></span> Hub de Homologação Deep Tech para Saúde</div>
 
-                <div class="feature-card">
-                    <div class="icon">// 02</div>
-                    <h4>Estabilização de Fluxos</h4>
-                    <p>Processamento massivo de dados voltado para eliminar gargalos e garantir a soberania das informações de saúde</p>
-                </div>
+          <h1>
+            A tecnologia da sua operação de saúde está pronta para escalar — ou só pronta para <span>falhar em produção?</span>
+          </h1>
 
-                <div class="feature-card">
-                    <div class="icon">// 03</div>
-                    <h4>Homologação Real</h4>
-                    <p>Testes práticos e contínuos que convertem inovações conceituais em soluções prontas para a linha de frente</p>
-                </div>
+          <p class="subtitle">
+            Testamos, validamos e homologamos equipamentos, softwares médicos e infraestruturas hospitalares com o rigor que reguladores, auditores e pacientes exigem. Você entra com a inovação. Nós entregamos a aprovação técnica que destrava contratos, compras públicas e escala comercial.
+          </p>
 
+          <div class="hero-actions">
+            <a href="#formulario" class="btn-primary">Solicitar Validação Técnica Gratuita →</a>
+            <a href="#metodologia" class="btn-secondary">Ver auditoria em 3 etapas</a>
+          </div>
+
+          <div class="trust-copy">
+            Resposta em até 48h úteis · Avaliação inicial sem custo · Sigilo contratual garantido
+          </div>
+
+          <div class="hero-proof" aria-label="Indicadores principais">
+            <div class="metric-card">
+              <strong>48h</strong>
+              <span>para diagnóstico técnico inicial</span>
             </div>
+            <div class="metric-card">
+              <strong>3 etapas</strong>
+              <span>auditoria, estabilização e homologação</span>
+            </div>
+            <div class="metric-card">
+              <strong>LGPD</strong>
+              <span>base técnica para conformidade e rastreabilidade</span>
+            </div>
+          </div>
         </div>
+
+        <aside class="cta-box" id="formulario" aria-label="Formulário de validação técnica">
+          <div class="cta-content">
+            <div class="mini-label">Diagnóstico inicial</div>
+            <h2>Descubra em 48h se sua tecnologia passa na nossa auditoria</h2>
+
+            <ul class="form-benefits">
+              <li><b>✓</b> Diagnóstico técnico inicial sem custo</li>
+              <li><b>✓</b> Relatório de conformidade regulatória</li>
+              <li><b>✓</b> Roteiro claro até a homologação</li>
+            </ul>
+
+            <form id="whatsappForm" onsubmit="enviarParaWhatsApp(event)">
+              <div class="form-group">
+                <label for="name">Nome completo</label>
+                <input type="text" id="name" name="name" required placeholder="Ex: Dr. Roberto Silva" autocomplete="name" />
+              </div>
+
+              <div class="form-group">
+                <label for="email">E-mail corporativo</label>
+                <input type="email" id="email" name="email" required placeholder="Ex: nome@empresa.com.br" autocomplete="email" />
+              </div>
+
+              <div class="form-group">
+                <label for="company">Empresa / Instituição</label>
+                <input type="text" id="company" name="company" required placeholder="Ex: Hospital, startup ou fabricante" autocomplete="organization" />
+              </div>
+
+              <div class="form-group">
+                <label for="segment">Você é</label>
+                <select id="segment" name="segment" required>
+                  <option value="" disabled selected>Selecione seu perfil</option>
+                  <option value="Gestão Hospitalar / Pública">Gestão Hospitalar / Pública</option>
+                  <option value="Desenvolvedor de Software Médico">Desenvolvedor de Software Médico</option>
+                  <option value="Fabricante de Equipamentos">Fabricante de Equipamentos</option>
+                  <option value="Investidor / Inovação">Investidor / Inovação</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn-submit">Quero minha avaliação →</button>
+            </form>
+
+            <div class="security-note">
+              Seus dados não são compartilhados. Falamos apenas com decisores qualificados.
+            </div>
+          </div>
+        </aside>
+      </div>
     </section>
 
-    <!-- RODAPÉ -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 HomeostasisHUB. Consolidação de Inovação Real. Todos os direitos reservados.</p>
+    <section class="logo-strip" aria-label="Prova social">
+      <div class="container">
+        <div class="logo-card">
+          <p>Validado por gestores de saúde pública, hospitais privados e fabricantes de tecnologia médica em todo o Brasil.</p>
+          <div class="logos">
+            <div class="logo-item">SUS</div>
+            <div class="logo-item">Secretarias</div>
+            <div class="logo-item">Hospitais</div>
+            <div class="logo-item">Startups MedTech</div>
+            <div class="logo-item">Fabricantes</div>
+          </div>
         </div>
-    </footer>
-<script>
-function enviarParaWhatsApp(event) {
-  event.preventDefault();
+      </div>
+    </section>
 
-  const nome = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const segmento = document.getElementById("segment").value;
+    <section class="section" id="para-quem">
+      <div class="container">
+        <div class="section-title">
+          <h2>Você precisa do HomeostasisHUB se a sua tecnologia precisa sobreviver ao mundo real.</h2>
+          <p>Menos apresentação bonita. Mais estabilidade, evidência, governança e prontidão para contrato.</p>
+        </div>
 
-  const telefone = "559881972712";
+        <div class="pain-grid">
+          <article class="pain-card">
+            <div class="pain-icon">!</div>
+            <h3>Sua tecnologia trava em auditorias regulatórias</h3>
+            <p>Antecipamos falhas técnicas, jurídicas e operacionais antes que elas bloqueiem venda, implantação ou aprovação.</p>
+          </article>
 
-  const mensagem =
-`🏥 *Novo Contato HomeostasisHUB*
+          <article class="pain-card">
+            <div class="pain-icon">!</div>
+            <h3>Seu hospital compra software que não escala em produção</h3>
+            <p>Avaliamos performance, arquitetura, segurança e fluxo de dados em cenário compatível com uso hospitalar real.</p>
+          </article>
+
+          <article class="pain-card">
+            <div class="pain-icon">!</div>
+            <h3>Seu edital exige homologação técnica independente</h3>
+            <p>Estruturamos evidências e documentação para apoiar compras públicas, licitações e processos de validação institucional.</p>
+          </article>
+
+          <article class="pain-card">
+            <div class="pain-icon">!</div>
+            <h3>Seu investidor exige due diligence técnica</h3>
+            <p>Transformamos risco técnico em mapa claro de maturidade, prioridade e caminho de escala.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="metodologia">
+      <div class="container">
+        <div class="section-title">
+          <h2>Como transformamos sua tecnologia em ativo homologado, auditável e vendável</h2>
+          <p>Uma metodologia direta para sair do protótipo e chegar à linha de frente do cuidado com menos risco.</p>
+        </div>
+
+        <div class="method-grid">
+          <article class="method-card">
+            <div class="step">01</div>
+            <h3>Auditoria Avançada</h3>
+            <span class="gain">O que você ganha: um raio-x técnico, jurídico e regulatório.</span>
+            <p>Analisamos arquitetura de software, hardware, LGPD, conformidade ANVISA/CFM e segurança da informação ponta-a-ponta antes que o mercado encontre as falhas.</p>
+          </article>
+
+          <article class="method-card">
+            <div class="step">02</div>
+            <h3>Estabilização de Fluxos</h3>
+            <span class="gain">O que você ganha: dados de saúde processados em escala.</span>
+            <p>Eliminamos travas de performance e estruturamos pipelines prontos para volumes hospitalares reais — não apenas para demonstrações comerciais.</p>
+          </article>
+
+          <article class="method-card">
+            <div class="step">03</div>
+            <h3>Homologação Real</h3>
+            <span class="gain">O que você ganha: evidência técnica para abrir portas.</span>
+            <p>Testes contínuos em ambiente operacional convertem protótipo em solução implantável para licitações, hospitais, investidores e linha de frente do cuidado.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resultados">
+      <div class="container">
+        <div class="section-title">
+          <h2>Indicadores que reduzem fricção comercial e aumentam confiança técnica.</h2>
+          <p>Use esses números como metas públicas iniciais e atualize conforme os primeiros projetos forem homologados.</p>
+        </div>
+
+        <div class="results-grid">
+          <div class="result-card">
+            <strong>+X</strong>
+            <span>tecnologias homologadas</span>
+          </div>
+          <div class="result-card">
+            <strong>48h</strong>
+            <span>para diagnóstico inicial</span>
+          </div>
+          <div class="result-card">
+            <strong>100%</strong>
+            <span>foco em ANVISA + LGPD nos projetos entregues</span>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <blockquote>“Saímos de um software instável para uma plataforma homologada e auditável em 90 dias.”</blockquote>
+          <cite>— Diretor de TI, hospital de grande porte</cite>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="final-cta">
+          <h2>Sua tecnologia merece chegar à linha de frente do cuidado.</h2>
+          <p>Comece com um diagnóstico técnico gratuito. Sem compromisso, sem enrolação.</p>
+          <a href="#formulario" class="btn-primary">Agendar conversa com nosso time técnico →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 HomeostasisHUB. Validação, homologação e consolidação de inovação real.
+    </div>
+  </footer>
+
+  <script>
+    function enviarParaWhatsApp(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const empresa = document.getElementById("company").value.trim();
+      const segmento = document.getElementById("segment").value;
+
+      const telefone = "559881972712";
+
+      const mensagem =
+`🏥 *Novo Lead HomeostasisHUB — Validação Técnica*
 
 👤 *Nome:* ${nome}
 📧 *E-mail:* ${email}
-🧩 *Segmento:* ${segmento}
+🏢 *Empresa/Instituição:* ${empresa}
+🧩 *Perfil:* ${segmento}
 
-🚀 Gostaria de iniciar um alinhamento estratégico.`;
+🚀 Quero uma avaliação técnica inicial em até 48h para entender se minha tecnologia passa na auditoria do HomeostasisHUB.`;
 
-  const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
-
-  window.open(url, "_blank");
-}
-</script>
+      const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  </script>
 </body>
 </html>
